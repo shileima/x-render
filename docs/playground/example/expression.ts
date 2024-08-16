@@ -28,8 +28,6 @@ const case1 = {
   }
 }
 
-
-
 const case2 = {
 	"type": "object",
   "properties": {

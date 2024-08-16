@@ -24,7 +24,7 @@ const Playground = () => {
       setValue(val);
     }
   }
-  
+
   const parseSchema = (str: string) => {
     try {
       if (lang === 'javascript') {
@@ -86,7 +86,7 @@ const Playground = () => {
                 {
                   label: 'Schema',
                   key: 'schema',
-                  children: 
+                  children:
                     <Editor
                       theme='vs-dark'
                       value={value}
@@ -105,12 +105,12 @@ const Playground = () => {
                         setValue(JSON.stringify(schema.schema, null, '\t'))
                       }}
                     />
-                  
+
                 },
                 {
                   label: 'FormData',
                   key: 'data',
-                  children: 
+                  children:
                     <Editor
                       theme='vs-dark'
                       value={JSON.stringify(formData, null, '\t')}
@@ -145,7 +145,7 @@ const Playground = () => {
             />
           </Col>
         </Row>
-     
+
     </div>
   );
 };

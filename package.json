@@ -11,7 +11,8 @@
   "workspaces": [
     "packages/*",
     "tools/schema-generator",
-    "tools/form-render-excel"
+    "tools/form-render-excel",
+    "tools/react-app"
   ],
   "scripts": {
     "build": "turbo run build",

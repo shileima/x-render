@@ -33,6 +33,9 @@ interface IConfigTypes {
     routes?: IConfigTypes['routes'];
     wrappers?: (Array<string> | undefined);
 } | { [x: string]: any }>;
+    routeLoader: {
+    moduleType: "esm" | "cjs";
+};
     reactRouter5Compat: boolean | {
 
 };
@@ -73,6 +76,7 @@ interface IConfigTypes {
     base?: (string | undefined);
     exclude?: (Array<any> | undefined);
 };
+    conventionLayout: boolean;
     base: string;
     analyze: {
 
@@ -82,12 +86,13 @@ interface IConfigTypes {
     targets: { [x: string]: any };
     svgr: { [x: string]: any };
     svgo: { [x: string]: any } | boolean;
+    stylusLoader: { [x: string]: any };
     styleLoader: { [x: string]: any };
     srcTranspilerOptions: {
     esbuild?: ({ [x: string]: any } | undefined);
     swc?: ({ [x: string]: any } | undefined);
 };
-    srcTranspiler: "babel" | "esbuild" | "swc" | "none";
+    srcTranspiler: "babel" | "esbuild" | "swc";
     sassLoader: { [x: string]: any };
     runtimePublicPath: {
 
@@ -141,7 +146,7 @@ interface IConfigTypes {
     esm: {
 
 };
-    devtool: "cheap-source-map" | "cheap-module-source-map" | "eval" | "eval-source-map" | "eval-cheap-source-map" | "eval-cheap-module-source-map" | "eval-nosources-cheap-source-map" | "eval-nosources-cheap-module-source-map" | "eval-nosources-source-map" | "source-map" | "hidden-source-map" | "hidden-nosources-cheap-source-map" | "hidden-nosources-cheap-module-source-map" | "hidden-nosources-source-map" | "hidden-cheap-source-map" | "hidden-cheap-module-source-map" | "inline-source-map" | "inline-cheap-source-map" | "inline-cheap-module-source-map" | "inline-nosources-cheap-source-map" | "inline-nosources-cheap-module-source-map" | "inline-nosources-source-map" | "nosources-source-map" | "nosources-cheap-source-map" | "nosources-cheap-module-source-map" | "#cheap-source-map" | "#cheap-module-source-map" | "#eval" | "#eval-source-map" | "#eval-cheap-source-map" | "#eval-cheap-module-source-map" | "#eval-nosources-cheap-source-map" | "#eval-nosources-cheap-module-source-map" | "#eval-nosources-source-map" | "#source-map" | "#hidden-source-map" | "#hidden-nosources-cheap-source-map" | "#hidden-nosources-cheap-module-source-map" | "#hidden-nosources-source-map" | "#hidden-cheap-source-map" | "#hidden-cheap-module-source-map" | "#inline-source-map" | "#inline-cheap-source-map" | "#inline-cheap-module-source-map" | "#inline-nosources-cheap-source-map" | "#inline-nosources-cheap-module-source-map" | "#inline-nosources-source-map" | "#nosources-source-map" | "#nosources-cheap-source-map" | "#nosources-cheap-module-source-map" | "@cheap-source-map" | "@cheap-module-source-map" | "@eval" | "@eval-source-map" | "@eval-cheap-source-map" | "@eval-cheap-module-source-map" | "@eval-nosources-cheap-source-map" | "@eval-nosources-cheap-module-source-map" | "@eval-nosources-source-map" | "@source-map" | "@hidden-source-map" | "@hidden-nosources-cheap-source-map" | "@hidden-nosources-cheap-module-source-map" | "@hidden-nosources-source-map" | "@hidden-cheap-source-map" | "@hidden-cheap-module-source-map" | "@inline-source-map" | "@inline-cheap-source-map" | "@inline-cheap-module-source-map" | "@inline-nosources-cheap-source-map" | "@inline-nosources-cheap-module-source-map" | "@inline-nosources-source-map" | "@nosources-source-map" | "@nosources-cheap-source-map" | "@nosources-cheap-module-source-map" | "#@cheap-source-map" | "#@cheap-module-source-map" | "#@eval" | "#@eval-source-map" | "#@eval-cheap-source-map" | "#@eval-cheap-module-source-map" | "#@eval-nosources-cheap-source-map" | "#@eval-nosources-cheap-module-source-map" | "#@eval-nosources-source-map" | "#@source-map" | "#@hidden-source-map" | "#@hidden-nosources-cheap-source-map" | "#@hidden-nosources-cheap-module-source-map" | "#@hidden-nosources-source-map" | "#@hidden-cheap-source-map" | "#@hidden-cheap-module-source-map" | "#@inline-source-map" | "#@inline-cheap-source-map" | "#@inline-cheap-module-source-map" | "#@inline-nosources-cheap-source-map" | "#@inline-nosources-cheap-module-source-map" | "#@inline-nosources-source-map" | "#@nosources-source-map" | "#@nosources-cheap-source-map" | "#@nosources-cheap-module-source-map" | boolean;
+    devtool: "cheap-source-map" | "cheap-module-source-map" | "eval" | "eval-source-map" | "eval-cheap-source-map" | "eval-cheap-module-source-map" | "eval-nosources-cheap-source-map" | "eval-nosources-cheap-module-source-map" | "eval-nosources-source-map" | "source-map" | "hidden-source-map" | "hidden-nosources-cheap-source-map" | "hidden-nosources-cheap-module-source-map" | "hidden-nosources-source-map" | "hidden-cheap-source-map" | "hidden-cheap-module-source-map" | "inline-source-map" | "inline-cheap-source-map" | "inline-cheap-module-source-map" | "inline-nosources-cheap-source-map" | "inline-nosources-cheap-module-source-map" | "inline-nosources-source-map" | "nosources-source-map" | "nosources-cheap-source-map" | "nosources-cheap-module-source-map" | boolean;
     depTranspiler: "babel" | "esbuild" | "swc" | "none";
     define: { [x: string]: any };
     deadCode: {
@@ -152,6 +157,7 @@ interface IConfigTypes {
     failOnHint?: (boolean | undefined);
     patterns?: (Array<string> | undefined);
 };
+    cssPublicPath: string;
     cssMinifierOptions: { [x: string]: any };
     cssMinifier: "cssnano" | "esbuild" | "parcelCSS" | "none";
     cssLoaderModules: { [x: string]: any };
@@ -160,6 +166,7 @@ interface IConfigTypes {
     from: string;
     to: string;
 } | string>;
+    checkDepCssModules?: boolean;
     cacheDirectoryPath: string;
     babelLoaderCustomize: string;
     autoprefixer: { [x: string]: any };
@@ -174,6 +181,7 @@ interface IConfigTypes {
 };
     exportStatic: {
     extraRoutePaths?: (((...args: any[]) => unknown) | Array<string> | undefined);
+    ignorePreRenderError?: (boolean | undefined);
 };
     favicons: Array<string>;
     helmet: boolean;
@@ -222,8 +230,13 @@ interface IConfigTypes {
 };
     ssr: {
     serverBuildPath?: (string | undefined);
+    serverBuildTarget?: ("express" | "worker" | undefined);
     platform?: (string | undefined);
-    builder?: ("esbuild" | "webpack" | undefined);
+    builder?: ("esbuild" | "webpack" | "mako" | undefined);
+    __INTERNAL_DO_NOT_USE_OR_YOU_WILL_BE_FIRED?: ({
+    pureApp?: (boolean | undefined);
+    pureHtml?: (boolean | undefined);
+} | undefined);
 };
     lowImport: {
     libs?: (Array<any> | undefined);
@@ -259,6 +272,40 @@ interface IConfigTypes {
 };
     ui: {
 
+};
+    mako: {
+    plugins?: (Array<{
+    load?: (((...args: any[]) => unknown) | undefined);
+    generateEnd?: (((...args: any[]) => unknown) | undefined);
+}> | undefined);
+    px2rem?: ({
+    root?: (number | undefined);
+    propBlackList?: (Array<string> | undefined);
+    propWhiteList?: (Array<string> | undefined);
+    selectorBlackList?: (Array<string> | undefined);
+    selectorWhiteList?: (Array<string> | undefined);
+    selectorDoubleList?: (Array<string> | undefined);
+} | undefined);
+    experimental?: ({
+    webpackSyntaxValidate?: (Array<string> | undefined);
+} | undefined);
+    flexBugs?: (boolean | undefined);
+    optimization?: ({
+    skipModules?: (boolean | undefined);
+} | undefined);
+};
+    hmrGuardian: boolean;
+    forget: {
+    ReactCompilerConfig?: ({
+
+} | undefined);
+};
+    verifyCommit: {
+    scope?: (Array<string> | undefined);
+    allowEmoji?: (boolean | undefined);
+};
+    run: {
+    globals?: (Array<string> | undefined);
 };
 };
 

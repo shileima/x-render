@@ -3,18 +3,26 @@
 // DO NOT CHANGE IT MANUALLY!
 import React, { useState, useEffect, useRef } from 'react';
 import { useOutlet, history } from 'dumi';
-import { SiteContext } from '/Users/zhanbo/happy/x-render/node_modules/dumi/dist/client/theme-api/context.js';
-import { demos, components } from '../meta';
+import { warning } from '/Users/shilei/code/x-render/node_modules/rc-util';
+import { SiteContext, type ISiteContext } from '/Users/shilei/code/x-render/node_modules/dumi/dist/client/theme-api/context.js';
+import { components } from '../meta/atoms';
 import { locales } from '../locales/config';
 
+
+
 const entryExports = {
-  
-  
 };
+
+// Static content
+const pkg = {"name":"root","version":"0.0.1","repository":{"type":"git","url":"git+https://github.com/alibaba/x-render.git","branch":"master","platform":"github"}};
+const historyType = "browser";
+const hostname = undefined;
+const themeConfig = {"footer":false,"prefersColor":{"default":"light","switch":true},"nprogress":true,"lastUpdated":true,"name":"XRender","logo":"https://img.alicdn.com/tfs/TB17UtINiLaK1RjSZFxXXamPFXa-606-643.png","socialLinks":{"github":"https://github.com/alibaba/x-render"},"nav":{"zh-CN":[{"title":"FormRender","link":"/form-render"},{"title":"TableRender","link":"/table-render"},{"title":"ChartRender","link":"/chart-render"},{"title":"Playground","link":"/playground"},{"title":"FormDemo","link":"/form-demo"}]},"sourceLink":"https://github.com/alibaba/x-render/tree/dev/{fileName}#L{line}","editLink":"https://github.com/alibaba/x-render/edit/dev/{filename}"};
+const _2_level_nav_available = true;
 
 export default function DumiContextWrapper() {
   const outlet = useOutlet();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const prev = useRef(history.location.pathname);
 
   useEffect(() => {
@@ -22,27 +30,51 @@ export default function DumiContextWrapper() {
       if (next.location.pathname !== prev.current) {
         prev.current = next.location.pathname;
 
-        // mark loading when route change, page component will set false when loaded
-        setLoading(true);
-
         // scroll to top when route changed
         document.documentElement.scrollTo(0, 0);
       }
     });
   }, []);
 
-  return (
-    <SiteContext.Provider value={{
-      pkg: {"name":"root","version":"0.0.1","repository":{"type":"git","url":"git+https://github.com/alibaba/x-render.git","branch":"master","platform":"github"}},
-      historyType: "browser",
+  const context: ISiteContext = React.useMemo(() => {
+    const ctx = {
+      pkg,
+      historyType,
       entryExports,
-      demos,
+      demos: null,
       components,
       locales,
       loading,
       setLoading,
-      themeConfig: {"footer":" Please feel free to use and contribute to the development.","prefersColor":{"default":"light","switch":true},"name":"XRender","logo":"https://img.alicdn.com/tfs/TB17UtINiLaK1RjSZFxXXamPFXa-606-643.png","socialLinks":{"github":"https://github.com/alibaba/x-render"},"nav":{"zh-CN":[{"title":"FormRender","link":"/form-render"},{"title":"TableRender","link":"/table-render"},{"title":"ChartRender","link":"/chart-render"},{"title":"表单设计器","link":"/generator"},{"title":"Playground","link":"/playground"}]}},
-    }}>
+      hostname,
+      themeConfig,
+      _2_level_nav_available,
+    };
+
+    // Proxy do not warning since `Object.keys` will get nothing to loop
+    Object.defineProperty(ctx, 'demos', {
+      get: () => {
+        warning(false, '`demos` return empty in latest version, please use `useDemo` instead.');
+        return {};
+      },
+    });
+
+    return ctx;
+  }, [
+    pkg,
+    historyType,
+    entryExports,
+    components,
+    locales,
+    loading,
+    setLoading,
+    hostname,
+    themeConfig,
+    _2_level_nav_available,
+  ]);
+
+  return (
+    <SiteContext.Provider value={context}>
       {outlet}
     </SiteContext.Provider>
   );

@@ -3,13 +3,14 @@
 // DO NOT CHANGE IT MANUALLY!
 import React, { useEffect, useState } from 'react';
 import { ApplyPluginsType } from 'umi';
-import { renderClient, RenderClientOpts } from '/Users/zhanbo/happy/x-render/node_modules/@umijs/preset-umi/node_modules/@umijs/renderer-react';
+import { renderClient, RenderClientOpts } from '/Users/shilei/code/x-render/node_modules/@umijs/renderer-react';
 import { createHistory } from './core/history';
 import { createPluginManager } from './core/plugin';
 import { getRoutes } from './core/route';
 import type { Location } from 'history';
 
-
+import { getPluginManager as getDumiPluginManager } from './core/plugin';
+import { setPluginManager as setDumiPluginManager } from '/Users/shilei/code/x-render/node_modules/dumi/dist/client/theme-api/utils.js';
 const publicPath = '/';
 const runtimePublicPath = false;
 

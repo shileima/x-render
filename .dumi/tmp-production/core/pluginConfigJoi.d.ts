@@ -3,13 +3,7 @@
 // Created by Umi Plugin
 
 export interface IConfigFromPluginsJoi {
-verifyCommit?: {
-scope?: string[]
-allowEmoji?: boolean
-}
-run?: {
-globals?: string[]
-}
+live?: boolean
 logo?: string
 themeConfig?: {
 
@@ -20,9 +14,9 @@ resolve?: {
 docDirs?: unknown[]
 atomDirs?: {
 type?: string
+subType?: string
 dir?: string
 }[]
-entityDirs?: unknown
 codeBlockMode?: ("active" | "passive")
 entryFile?: string
 forceKebabCaseRouting?: boolean
@@ -55,5 +49,8 @@ assets?: {
 sitemap?: {
 hostname?: string
 exclude?: string[]
+}
+html2sketch?: {
+scriptUrl?: string
 }
 }

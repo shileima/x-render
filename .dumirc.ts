@@ -31,6 +31,10 @@ export default defineConfig({
         {
           title: 'Playground',
           link: '/playground',
+        },
+        {
+          title: 'FormDemo',
+          link: '/form-demo',
         }
       ],
       // 'en-US': [
@@ -69,7 +73,7 @@ export default defineConfig({
     'https://g.alicdn.com/code/lib/react-dom/17.0.1/umd/react-dom.production.min.js'
   ],
   plugins: [require.resolve('./scripts/dumi-plugin/redirect')],
-  alias: { 
+  alias: {
     'form-render':  path.resolve(__dirname, 'packages/form-render/src'),
     'table-render':  path.resolve(__dirname, 'packages/table-render/src'),
     '@xrenders/schema-builder':  path.resolve(__dirname, 'tools/schema-builder/src'),
